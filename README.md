@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/github/license/apytypes/apytypes)](https://github.com/apytypes/apytypes/blob/main/LICENSE.txt)
 ![Workflow Status](https://img.shields.io/github/actions/workflow/status/apytypes/apytypes/tests.yml)
 [![codecov](https://codecov.io/gh/apytypes/apytypes/graph/badge.svg?token=734MDWN7SU)](https://codecov.io/gh/apytypes/apytypes)
+[![covdbg - Windows coverage for C++](https://covdbg.com/badge.svg)](https://covdbg.com/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11197884.svg)](https://doi.org/10.5281/zenodo.11197884)
 
 APyTypes is a Python library providing algorithmic scalar and array data types,

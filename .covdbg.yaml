@@ -1,0 +1,15 @@
+# Windows C++ coverage for run_coverage.yml (windows_msvc): the extension module, as
+# OpenCppCoverage's --modules "*_apytypes*.pyd", with the sources in this checkout.
+version: 1
+source_root: "."
+coverage:
+  default:
+    files:
+      include:
+        - "src/**"
+        - "lib/**"
+        - "subprojects/**"
+        - "build/**"
+    modules:
+      include:
+        - "*_apytypes*.pyd"
