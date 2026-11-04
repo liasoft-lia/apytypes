@@ -4810,6 +4810,34 @@ class APyFixed:
         """
 
     def __abs__(self) -> APyFixed: ...
+    def next_up(self) -> APyFixed:
+        """
+        Return the next representable fixed-point number in the same format.
+
+        The word length is not increased. At the maximum representable value,
+        the result is unchanged: the operation saturates instead of wrapping.
+
+        .. versionadded:: 0.6
+
+        Returns
+        -------
+        :class:`APyFixed`
+        """
+
+    def next_down(self) -> APyFixed:
+        """
+        Return the previous representable fixed-point number in the same format.
+
+        The word length is not increased. At the minimum representable value,
+        the result is unchanged: the operation saturates instead of wrapping.
+
+        .. versionadded:: 0.6
+
+        Returns
+        -------
+        :class:`APyFixed`
+        """
+
     def __float__(self) -> float: ...
     def __repr__(self) -> str: ...
     def __str__(self, base: int = 10) -> str: ...
@@ -6341,6 +6369,34 @@ class APyFixedArray:
     def __matmul__(self, rhs: APyCFixedArray) -> APyCFixedArray | APyCFixed: ...
     def __repr__(self) -> str: ...
     def __abs__(self) -> APyFixedArray: ...
+    def next_up(self) -> APyFixedArray:
+        """
+        Return the next representable value of each element in the same format.
+
+        The word length is not increased. Elements at the maximum representable
+        value remain unchanged: the operation saturates instead of wrapping.
+
+        .. versionadded:: 0.6
+
+        Returns
+        -------
+        :class:`APyFixedArray`
+        """
+
+    def next_down(self) -> APyFixedArray:
+        """
+        Return the previous representable value of each element in the same format.
+
+        The word length is not increased. Elements at the minimum representable
+        value remain unchanged: the operation saturates instead of wrapping.
+
+        .. versionadded:: 0.6
+
+        Returns
+        -------
+        :class:`APyFixedArray`
+        """
+
     def __str__(self, base: int = 10) -> str: ...
     def __getitem__(
         self,
@@ -7451,6 +7507,8 @@ class APyFloatArray:
     @overload
     def __ge__(self, arg: APyFloat, /) -> NDArray[numpy.bool]: ...
     def __abs__(self) -> APyFloatArray: ...
+    def next_up(self) -> APyFloatArray: ...
+    def next_down(self) -> APyFloatArray: ...
     @overload
     def __radd__(self, arg: int, /) -> APyFloatArray: ...
     @overload

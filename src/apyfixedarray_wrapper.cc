@@ -1834,6 +1834,9 @@ void bind_fixed_array(nb::module_& m)
                            [6, 6, 6]], int_bits=5, frac_bits=0)
             )pbdoc"
         )
+        .def_static(
+            "_nextafter", &APyFixedArray::nextafter, nb::arg("x1"), nb::arg("x2")
+        )
 
         /*
          * Dunder methods
@@ -1854,6 +1857,38 @@ void bind_fixed_array(nb::module_& m)
         )
         .def("__repr__", &APyFixedArray::repr)
         .def("__abs__", &APyFixedArray::abs)
+        .def(
+            "next_up",
+            &APyFixedArray::next_up,
+            R"pbdoc(
+            Return the next representable value of each element in the same format.
+
+            The word length is not increased. Elements at the maximum representable
+            value remain unchanged: the operation saturates instead of wrapping.
+
+            .. versionadded:: 0.6
+
+            Returns
+            -------
+            :class:`APyFixedArray`
+            )pbdoc"
+        )
+        .def(
+            "next_down",
+            &APyFixedArray::next_down,
+            R"pbdoc(
+            Return the previous representable value of each element in the same format.
+
+            The word length is not increased. Elements at the minimum representable
+            value remain unchanged: the operation saturates instead of wrapping.
+
+            .. versionadded:: 0.6
+
+            Returns
+            -------
+            :class:`APyFixedArray`
+            )pbdoc"
+        )
         .def("__str__", &APyFixedArray::to_string, nb::arg("base") = 10)
 
         // Iteration and friends

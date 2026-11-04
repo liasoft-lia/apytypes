@@ -293,6 +293,14 @@ public:
     //! Elementwise absolute value
     APyFixedArray abs() const;
 
+    //! Elementwise next representable value in the same format.
+    //! The word length is unchanged. Saturates at the maximum instead of wrapping.
+    APyFixedArray next_up() const;
+
+    //! Elementwise previous representable value in the same format.
+    //! The word length is unchanged. Saturates at the minimum instead of wrapping.
+    APyFixedArray next_down() const;
+
     /*!
      * Create a new array with the same shape as `*this`, but with all elements
      * set to zero.

@@ -2847,6 +2847,56 @@ def outer(a: APyArray, b: APyArray) -> APyArray:
     return outer(b)
 
 
+@overload
+def nextafter(x1: APyFloatArray, x2: APyFloatArray | APyFloat) -> APyFloatArray: ...
+@overload
+def nextafter(x1: APyFixedArray, x2: APyFixedArray | APyFixed) -> APyFixedArray: ...
+
+
+def nextafter(
+    x1: APyFloatArray | APyFixedArray,
+    x2: APyFloatArray | APyFixedArray | APyFloat | APyFixed,
+) -> APyFloatArray | APyFixedArray:
+    """
+    Return the next representable value of `x1` in the direction of `x2`, element-wise.
+    If `x1.shape` != `x2.shape`, they must be broadcastable to a common shape
+    (which becomes the shape of the output).
+
+    .. versionadded:: 0.6
+
+    Parameters
+    ----------
+    x1 : :class:`APyFloatArray` or :class:`APyFixedArray`
+        Values to get the next representable value of.
+    x2 : :class:`APyFloatArray`, :class:`APyFixedArray`, :class:`APyFixed`, or :class:`APyFloat`
+        Direction in which to get the next representable value.
+
+    Returns
+    -------
+    :class:`APyArray`
+        Same type as `x1`.
+    """
+    if not isinstance(x1, APyFloatArray | APyFixedArray):
+        raise TypeError(f"nextafter: x1 must be a real APyArray, got {type(x1)}")
+
+    if isinstance(x1, APyFixedArray):
+        if not isinstance(x2, APyFixedArray | APyFixed):
+            raise TypeError(
+                "nextafter: x2 must be APyFixedArray or APyFixed when x1 is "
+                f"APyFixedArray, got {type(x2)}"
+            )
+    elif not isinstance(x2, APyFloatArray | APyFloat):
+        raise TypeError(
+            "nextafter: x2 must be APyFloatArray or APyFloat when x1 is "
+            f"APyFloatArray, got {type(x2)}"
+        )
+
+    if isinstance(x2, APyFixed | APyFloat):
+        x2 = type(x1).from_float([x2], spec=x2)
+
+    return x1._nextafter(x1, x2)
+
+
 # =============================================================================
 # Helpers
 # =============================================================================
